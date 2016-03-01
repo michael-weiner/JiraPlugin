@@ -1,0 +1,42 @@
+<atlassian-plugin key="${atlassian.plugin.key}" name="${project.name}"
+	plugins-version="2">
+
+	<plugin-info>
+		<description>${project.description}</description>
+		<version>${project.version}</version>
+		<vendor name="${project.organization.name}" url="${project.organization.url}" />
+		<param name="plugin-icon">images/pluginIcon.png</param>
+		<param name="plugin-logo">images/pluginLogo.png</param>
+	</plugin-info>
+	
+	<component-import key="eventPublisher" interface="com.atlassian.event.api.EventPublisher"/>
+
+	<!-- add our i18n resource -->
+	<resource type="i18n" name="i18n" location="notesplugin" />
+
+	<!-- add our web resources -->
+	<web-resource key="notesplugin-resources" name="notesplugin Web Resources">
+		<dependency>com.atlassian.auiplugin:ajs</dependency>
+
+		<resource type="download" name="notesplugin.css" location="/css/notesplugin.css" />
+		<resource type="download" name="notesplugin.js" location="/js/notesplugin.js" />
+		<resource type="download" name="images/" location="/images" />
+
+		<context>notesplugin</context>
+	</web-resource>
+
+	<jira-renderer system="true" key="notes-link-renderer"
+		name="not working renderer" class="de.tolina.renderer.NotesLinkRenderer">
+		<description>First Try</description>
+		<resource type="velocity" name="edit"
+			location="templates/plugins/renderers/wiki/wiki-renderer-edit.vm" />
+	</jira-renderer>
+
+<!-- 	<jira-renderer system="true" key="tolina-custom-renderer"
+		name="Tolina Custom Renderer" class="de.tolina.renderer.TolinaCustomRenderer">
+		<description>Second try</description>
+		<resource type="velocity" name="edit"
+			location="templates/plugins/renderers/wiki/wiki-renderer-edit.vm" />
+	</jira-renderer> -->
+
+</atlassian-plugin>
